@@ -14,19 +14,21 @@
 // Imports
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const aib = require('./lib/ai_image_functions');
 
 // Instantiation
 var app = express();
 app.use(express.json()); // To be able to read and write JSONs
 app.use(cors()); // To handle all CORS problems
-
+app.use(express.static(path.join(__dirname, 'public-flutter')));	// Link all the flutter files
 
 // This is the main URL to obtain the background
 app.post('/background', async function (req, res) {
 	// Sanity Check: Checking if the x field in the JSON exists
 	if (true){		
 		try{
+			console.log(req.body);
             // Variables
             centerPosition=5
             width = 64;
@@ -36,8 +38,10 @@ app.post('/background', async function (req, res) {
 
             // Create cool background
             img = await aib.generateBackground(
-                imgWidth=width, imgHeight=height, neurons=numNeurons,
-                isVortex=vortex, centerLocation=centerPosition);
+                imgWidth=req.body.width, imgHeight=req.body.height, neurons=req.body.neurons,
+                isVortex=req.body.vortex, centerLocation=req.bodycenterPosition,
+				red=req.body.red, green=req.body.green, blue=req.body.blue,
+			);
 
             // Return the result
             res.status(200).json({image: img});
@@ -65,5 +69,5 @@ var server = app.listen(process.env.PORT || 16000, function () {
     var host = server.address().address
     var port = server.address().port
     
-    console.log("App listening at http://%s:%s", host, port)
+    console.log("App listening at http://%s:%d", host, port)
  })

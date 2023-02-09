@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 // Models
+import 'package:flutter/foundation.dart';
 import 'package:flutter_frontend/data/models/background.dart';
 import 'package:flutter_frontend/data/models/operation_result.dart';
 
@@ -9,13 +10,13 @@ import 'package:flutter_frontend/data/models/operation_result.dart';
 import 'package:http/http.dart' as http;
 
 class NodeJSDatasource {
-  static const String nodejsURL = '';
+  static const String nodejsURL = 'http://127.0.0.1:16000/';
 
   Future<Result> sendAndGenerate({required Background background}) async {
     try {
       // Send data to server
       final response = await http.post(
-        Uri.parse('https://jsonplaceholder.typicode.com/albums'),
+        Uri.parse("${nodejsURL}background"),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

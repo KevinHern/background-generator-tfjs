@@ -1,15 +1,17 @@
 import 'dart:ui' show Color;
 
+import 'package:equatable/equatable.dart';
+
 enum CenterVerticalPosition { TOP, CENTER, BOTTOM }
 
-enum CenterHorizontalPosition { RIGHT, CENTER, LEFT }
+enum CenterHorizontalPosition { LEFT, CENTER, RIGHT }
 
-class Background {
+class Background extends Equatable {
   static const List<String> centerVerticalLabels = ["Top", "Middle", "Bottom"];
   static const List<String> centerHorizontalLabels = [
-    "Right",
+    "Left",
     "Center",
-    "Left"
+    "Right"
   ];
   static const List<String> imageQualityLabels = [
     "Low",
@@ -41,6 +43,8 @@ class Background {
     width = newBackground.width;
     imageQuality = newBackground.imageQuality;
     color = newBackground.color;
+    centerVerticalPosition = newBackground.centerVerticalPosition;
+    centerHorizontalPosition = newBackground.centerHorizontalPosition;
     isVortex = newBackground.isVortex;
   }
 
@@ -51,11 +55,23 @@ class Background {
         "red": color.red,
         "green": color.green,
         "blue": color.blue,
-        "verticalPosition": centerVerticalPosition.index,
-        "horizontalPosition": centerHorizontalPosition.index,
+        "centerPosition": (centerVerticalPosition.index * 3) +
+            centerHorizontalPosition.index +
+            1,
         "vortex": isVortex,
       };
 
   getImgFromJson({required Map<String, dynamic> json}) =>
-      encodedBase64Img = json['img'];
+      encodedBase64Img = json['image'];
+
+  @override
+  List<Object?> get props => [
+        height,
+        width,
+        imageQuality,
+        color,
+        centerVerticalPosition,
+        centerHorizontalPosition,
+        isVortex
+      ];
 }

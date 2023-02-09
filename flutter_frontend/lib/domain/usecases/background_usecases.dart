@@ -14,8 +14,9 @@ import '../../data/datasources/nodejs_datasource.dart';
 class BackgroundUseCases {
   BackgroundManagementRepository backgroundManagementRepository;
   NodeJSDatasource nodeJSDatasource;
-  BackgroundUseCases({required this.backgroundManagementRepository})
-      : nodeJSDatasource = NodeJSDatasource();
+  BackgroundUseCases(
+      {required this.backgroundManagementRepository,
+      required this.nodeJSDatasource});
 
   Future<Result> generateBackground({
     required int height,
@@ -25,13 +26,12 @@ class BackgroundUseCases {
     required CenterVerticalPosition centerVerticalPosition,
     required bool isVortex,
     required int imageQuality,
-    required Background oldBackground,
   }) async {
     // Create Model
     final Background newBackground =
         backgroundManagementRepository.createBackground(
-            height: height,
-            width: width,
+            selectedHeight: height,
+            selectedWidth: width,
             color: color,
             centerHorizontalPosition: centerHorizontalPosition,
             centerVerticalPosition: centerVerticalPosition,

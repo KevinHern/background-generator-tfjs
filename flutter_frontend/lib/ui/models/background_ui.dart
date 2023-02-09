@@ -5,12 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_frontend/data/models/background.dart';
 
 class BackgroundUI extends ChangeNotifier {
-  Background _background;
+  Background? _background;
 
-  BackgroundUI({required Background background}) : _background = background;
+  BackgroundUI({Background? background}) : _background = background;
+
+  // Setters
+  set background(value) {
+    _background = value;
+    notifyListeners();
+  }
 
   // Getters
-  Background get background => _background;
+  Background? get background => _background;
 
   // Methods
   void update() => notifyListeners();
@@ -25,8 +31,8 @@ class BackgroundFormUI extends ChangeNotifier {
   CenterHorizontalPosition centerHorizontalPosition;
 
   BackgroundFormUI()
-      : selectedHeight = 0,
-        selectedWidth = 0,
+      : selectedHeight = 1,
+        selectedWidth = 1,
         selectedImgQuality = 1,
         isRGBInputColorWheelMode = true,
         isVortexMode = true,

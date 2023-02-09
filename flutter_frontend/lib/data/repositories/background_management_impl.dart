@@ -11,8 +11,8 @@ import 'package:flutter_frontend/domain/repositories/background_management_contr
 class BackgroundManagementImpl implements BackgroundManagementRepository {
   @override
   Background createBackground({
-    required int height,
-    required int width,
+    required int selectedHeight,
+    required int selectedWidth,
     required Color color,
     required CenterHorizontalPosition centerHorizontalPosition,
     required CenterVerticalPosition centerVerticalPosition,
@@ -20,8 +20,8 @@ class BackgroundManagementImpl implements BackgroundManagementRepository {
     required int imageQuality,
   }) =>
       Background(
-        height: height,
-        width: width,
+        height: Background.imgDimensions[selectedHeight],
+        width: Background.imgDimensions[selectedWidth],
         color: color,
         centerHorizontalPosition: centerHorizontalPosition,
         centerVerticalPosition: centerVerticalPosition,
