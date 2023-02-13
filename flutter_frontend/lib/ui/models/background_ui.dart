@@ -24,7 +24,7 @@ class BackgroundUI extends ChangeNotifier {
 
 class BackgroundFormUI extends ChangeNotifier {
   final TextEditingController hexColorInput;
-  int selectedHeight, selectedWidth, selectedImgQuality;
+  int selectedHeight, selectedWidth, selectedimageComplexity;
   bool isRGBInputColorWheelMode, isVortexMode;
   Color selectedColor;
   CenterVerticalPosition centerVerticalPosition;
@@ -33,7 +33,7 @@ class BackgroundFormUI extends ChangeNotifier {
   BackgroundFormUI()
       : selectedHeight = 1,
         selectedWidth = 1,
-        selectedImgQuality = 1,
+        selectedimageComplexity = 1,
         isRGBInputColorWheelMode = true,
         isVortexMode = true,
         hexColorInput = TextEditingController(),

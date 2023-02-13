@@ -16,7 +16,7 @@ void main() {
           final Background background = Background(
             height: 10,
             width: 10,
-            imageQuality: 10,
+            imageComplexity: 10,
             color: Colors.white,
             centerVerticalPosition: CenterVerticalPosition.CENTER,
             centerHorizontalPosition: CenterHorizontalPosition.CENTER,
@@ -25,12 +25,11 @@ void main() {
           final Map<String, dynamic> expectedResult = {
             "height": 10,
             "width": 10,
-            "neurons": 14,
+            "neurons": 11,
             "red": 255,
             "green": 255,
             "blue": 255,
-            "verticalPosition": 1,
-            "horizontalPosition": 1,
+            "centerPosition": 5,
             "vortex": true,
           };
 
@@ -49,7 +48,7 @@ void main() {
           final Background oldBackground = Background(
             height: 10,
             width: 10,
-            imageQuality: 10,
+            imageComplexity: 10,
             color: Colors.white,
             centerVerticalPosition: CenterVerticalPosition.CENTER,
             centerHorizontalPosition: CenterHorizontalPosition.CENTER,
@@ -58,7 +57,7 @@ void main() {
           final Background newBackground = Background(
             height: 30,
             width: 30,
-            imageQuality: 50,
+            imageComplexity: 50,
             color: Colors.blue,
             centerVerticalPosition: CenterVerticalPosition.TOP,
             centerHorizontalPosition: CenterHorizontalPosition.LEFT,

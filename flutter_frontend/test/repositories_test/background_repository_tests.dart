@@ -17,18 +17,18 @@ void main() {
         "Should create a new Background Model when 'createBackground' is called.",
         () {
           // Preparing Data
-          const height = 10,
-              width = 10,
-              imageQuality = 10,
+          const height = 3,
+              width = 3,
+              imageComplexity = 2,
               color = Colors.white,
               centerVerticalPosition = CenterVerticalPosition.CENTER,
               centerHorizontalPosition = CenterHorizontalPosition.CENTER,
               isVortex = true;
 
           Background expectedResult = Background(
-              height: height,
-              width: width,
-              imageQuality: imageQuality,
+              height: 256,
+              width: 256,
+              imageComplexity: imageComplexity,
               color: color,
               centerVerticalPosition: centerVerticalPosition,
               centerHorizontalPosition: centerHorizontalPosition,
@@ -39,17 +39,17 @@ void main() {
 
           // Test
           final result = backgroundManagementRepository.createBackground(
-            height: height,
-            width: width,
+            selectedHeight: height,
+            selectedWidth: width,
             color: color,
             centerHorizontalPosition: centerHorizontalPosition,
             centerVerticalPosition: centerVerticalPosition,
             isVortex: isVortex,
-            imageQuality: imageQuality,
+            imageComplexity: imageComplexity,
           );
 
           // Evaluate
-          expect(expectedResult, result);
+          expect(result, expectedResult);
         },
       );
 
@@ -60,7 +60,7 @@ void main() {
           final Background oldBackground = Background(
             height: 10,
             width: 10,
-            imageQuality: 10,
+            imageComplexity: 10,
             color: Colors.white,
             centerVerticalPosition: CenterVerticalPosition.CENTER,
             centerHorizontalPosition: CenterHorizontalPosition.CENTER,
@@ -69,7 +69,7 @@ void main() {
           final Background newBackground = Background(
             height: 30,
             width: 30,
-            imageQuality: 50,
+            imageComplexity: 50,
             color: Colors.blue,
             centerVerticalPosition: CenterVerticalPosition.TOP,
             centerHorizontalPosition: CenterHorizontalPosition.LEFT,

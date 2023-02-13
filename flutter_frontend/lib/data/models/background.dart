@@ -19,9 +19,9 @@ class Background extends Equatable {
     "High",
     "Very High"
   ];
-  static const List<int> imgDimensions = [32, 64, 128, 256];
-  static const List<int> imgQuality = [0, 1, 2, 3];
-  int height, width, imageQuality;
+  static const List<int> imgDimensions = [32, 64, 128, 256, 512];
+  static const List<int> imgComplexity = [0, 1, 2, 3];
+  int height, width, imageComplexity;
   Color color;
   CenterVerticalPosition centerVerticalPosition;
   CenterHorizontalPosition centerHorizontalPosition;
@@ -31,7 +31,7 @@ class Background extends Equatable {
   Background(
       {required this.height,
       required this.width,
-      required this.imageQuality,
+      required this.imageComplexity,
       required this.color,
       required this.centerVerticalPosition,
       required this.centerHorizontalPosition,
@@ -41,7 +41,7 @@ class Background extends Equatable {
   void update({required Background newBackground}) {
     height = newBackground.height;
     width = newBackground.width;
-    imageQuality = newBackground.imageQuality;
+    imageComplexity = newBackground.imageComplexity;
     color = newBackground.color;
     centerVerticalPosition = newBackground.centerVerticalPosition;
     centerHorizontalPosition = newBackground.centerHorizontalPosition;
@@ -51,7 +51,7 @@ class Background extends Equatable {
   Map<String, dynamic> toMap() => {
         "height": height,
         "width": width,
-        "neurons": imageQuality + 4,
+        "neurons": imageComplexity + 1,
         "red": color.red,
         "green": color.green,
         "blue": color.blue,
@@ -68,7 +68,7 @@ class Background extends Equatable {
   List<Object?> get props => [
         height,
         width,
-        imageQuality,
+        imageComplexity,
         color,
         centerVerticalPosition,
         centerHorizontalPosition,

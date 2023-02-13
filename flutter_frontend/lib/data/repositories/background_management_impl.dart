@@ -17,7 +17,7 @@ class BackgroundManagementImpl implements BackgroundManagementRepository {
     required CenterHorizontalPosition centerHorizontalPosition,
     required CenterVerticalPosition centerVerticalPosition,
     required bool isVortex,
-    required int imageQuality,
+    required int imageComplexity,
   }) =>
       Background(
         height: Background.imgDimensions[selectedHeight],
@@ -26,7 +26,7 @@ class BackgroundManagementImpl implements BackgroundManagementRepository {
         centerHorizontalPosition: centerHorizontalPosition,
         centerVerticalPosition: centerVerticalPosition,
         isVortex: isVortex,
-        imageQuality: imageQuality,
+        imageComplexity: imageComplexity,
       );
 
   @override

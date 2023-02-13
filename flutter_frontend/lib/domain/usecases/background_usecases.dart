@@ -25,7 +25,7 @@ class BackgroundUseCases {
     required CenterHorizontalPosition centerHorizontalPosition,
     required CenterVerticalPosition centerVerticalPosition,
     required bool isVortex,
-    required int imageQuality,
+    required int imageComplexity,
   }) async {
     // Create Model
     final Background newBackground =
@@ -36,7 +36,7 @@ class BackgroundUseCases {
             centerHorizontalPosition: centerHorizontalPosition,
             centerVerticalPosition: centerVerticalPosition,
             isVortex: isVortex,
-            imageQuality: imageQuality);
+            imageComplexity: imageComplexity);
 
     // Send to server and await
     final Result backgroundResult =

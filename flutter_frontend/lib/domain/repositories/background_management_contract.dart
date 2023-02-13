@@ -13,7 +13,7 @@ abstract class BackgroundManagementRepository {
     required CenterHorizontalPosition centerHorizontalPosition,
     required CenterVerticalPosition centerVerticalPosition,
     required bool isVortex,
-    required int imageQuality,
+    required int imageComplexity,
   });
   void updateBackground(
       {required Background newBackground, required Background oldBackground});
