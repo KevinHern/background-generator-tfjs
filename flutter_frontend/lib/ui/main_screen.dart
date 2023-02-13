@@ -17,42 +17,16 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
-      child: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: const TabBar(
-              tabs: [
-                Tab(
-                  text: "Form",
-                  icon: Icon(
-                    Icons.menu,
-                    size: 40,
-                  ),
-                ),
-                Tab(
-                  text: "Collection",
-                  icon: Icon(
-                    Icons.collections,
-                    size: 40,
-                  ),
-                ),
-              ],
-            ),
-            title: Text(
-              "AI Background Generator",
-              style: Theme.of(context).textTheme.displayMedium,
-            ),
-            centerTitle: true,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "AI Background Generator",
+            style: Theme.of(context).textTheme.displayMedium,
           ),
-          body: TabBarView(
-            children: [
-              FormProviders(
-                backgroundManagementRepository: backgroundManagementRepository,
-              ),
-              Container(),
-            ],
-          ),
+          centerTitle: true,
+        ),
+        body: FormProviders(
+          backgroundManagementRepository: backgroundManagementRepository,
         ),
       ),
     );
