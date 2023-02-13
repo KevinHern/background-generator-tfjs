@@ -28,18 +28,10 @@ app.post('/background', async function (req, res) {
 	// Sanity Check: Checking if the x field in the JSON exists
 	if (true){		
 		try{
-			console.log(req.body);
-            // Variables
-            centerPosition=5
-            width = 64;
-            height = 64;
-            numNeurons = 4;
-            vortex = false;
-
             // Create cool background
             img = await aib.generateBackground(
                 imgWidth=req.body.width, imgHeight=req.body.height, neurons=req.body.neurons,
-                isVortex=req.body.vortex, centerLocation=req.bodycenterPosition,
+                isVortex=req.body.vortex, centerLocation=req.body.centerPosition,
 				red=req.body.red, green=req.body.green, blue=req.body.blue,
 			);
 

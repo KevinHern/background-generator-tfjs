@@ -6,37 +6,37 @@ const tfnode = require('@tensorflow/tfjs-node');
 
 
 // Used to calculate where the center of the image will be
-function centerNormalization(centerPosition=5){
+function centerNormalization(centerPosition){
     var scales = [1, 1]
 
     // Calculate center position scales
     switch(centerPosition){
-        // Bottom Left
+        // Top Left
         case 1:
             scales[0] = 0.25
             scales[1] = 0.75
             break;
-        // Bottom Center
+        // Top Center
         case 2:
             scales[0] = 0.5
             scales[1] = 0.75
             break;
-        // Bottom Right
+        // Top Right
         case 3:
             scales[0] = 0.75
             scales[1] = 0.75
             break;
-        // Bottom Left
+        // Middle Left
         case 4:
             scales[0] = 0.25
             scales[1] = 0.5
             break;
-        // Bottom Center
+        // Middle Center
         case 5:
             scales[0] = 0.5
             scales[1] = 0.5
             break;
-        // Bottom Right
+        // Middle Right
         case 6:
             scales[0] = 0.75
             scales[1] = 0.5
@@ -86,7 +86,7 @@ function createImage(width, height, center){
 }
 
 // Generates background using AI
-async function generateBackground(imgWidth, imgHeight, neurons, isVortex, centerLocation) {
+async function generateBackground(imgWidth, imgHeight, neurons, isVortex, centerLocation, red, green, blue) {
 
     /* IMAGE CREATION */
     // Deduce the constants to normalize a center
@@ -100,7 +100,7 @@ async function generateBackground(imgWidth, imgHeight, neurons, isVortex, center
     // Additional Parameters Initialization
     const activationFunction = isVortex ? "tanh" : "sigmoid";
     const additionalNeurons = isVortex ? 0 : 2;
-    const numberLayers = 2;
+    const numberLayers = 3;
 
     // Limiting neurons
     neurons = (neurons < 4) ? 4: (neurons > 7) ? 7: neurons;
@@ -113,7 +113,7 @@ async function generateBackground(imgWidth, imgHeight, neurons, isVortex, center
     // Objects Instantiations
     for(var i = 0; i < numberLayers; i++) {
         // Kernel Initializer instantiation
-        kernelInitializers.push(tf.initializers.randomUniform({minval: -5, maxval: 5}));
+        kernelInitializers.push(tf.initializers.randomUniform({minval: -3, maxval: 3}));
 
         // Kernel Constraint instantiation
         kernelConstraints.push(tf.constraints.maxNorm({maxValue: 5}));
@@ -121,10 +121,10 @@ async function generateBackground(imgWidth, imgHeight, neurons, isVortex, center
         // Layer Creation
         layers.push(
             tf.layers.dense({
-                units: Math.pow(2, neurons + additionalNeurons + 2*(i+1)),
+                units: Math.pow(2, neurons + additionalNeurons + i),
                 kernelInitializer: kernelInitializers[0],
                 kernelConstraint: kernelConstraints[1],
-                useBias: false,
+                useBias: true,
                 activation: activationFunction,
             })
         );
@@ -135,7 +135,7 @@ async function generateBackground(imgWidth, imgHeight, neurons, isVortex, center
         tf.layers.dense({
             units: 3,
             kernelInitializer: tf.initializers.randomNormal({mean: 0, stddev: 1}),
-            useBias: false,
+            useBias: true,
             activation: "sigmoid",
         })
     );
@@ -149,10 +149,10 @@ async function generateBackground(imgWidth, imgHeight, neurons, isVortex, center
         }
 
         // Scaling image from [0, 1] to [0, 255]
-        tensor_image = tensor_image.mul(tf.tensor([255, 255, 255]));
+        tensor_image = tensor_image.mul(tf.tensor([red, green, blue]));
 
         // Casting resulting image to int
-        tensor_image = tf.cast(tensor_image, "int32");
+        // tensor_image = tf.cast(tensor_image, "int32");
 
         // Reshaping resulting image
         return tensor_image.reshape([width, height, 3]);
