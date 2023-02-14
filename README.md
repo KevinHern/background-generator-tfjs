@@ -48,6 +48,27 @@ Certainly, the results were very interesting and fun to mess around. The project
 
 One of the Future Improvements was converting that Google Colab Notebook into something friendly that users could interact anywhere at anytime; basically, an application.
 
+# Directory Structure
+- flutter_frontend:
+This directory contains the source code of the frontend made in flutter. The source code is located under **/lib/** and the directory structure inside of it follows the [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html).
+- nodejs-server:
+This directory contains the source code of the backend with an already pre-built frontend.
+    - The pre-built app is under **/public-flutter/** directory.
+    - The AI script is under **/src/** directory.
+    - The internal Routing and app declaration are under the **/app/** directory.
+
+To initialize the project, execute the following command inside the **/nodejs-server/** directory:
+
+```bat
+npm install
+```
+
+The entry point is **index.js**:
+
+```bat
+node index.js
+```
+
 # References
 Here are some useful links used to make this project a reality.
 
