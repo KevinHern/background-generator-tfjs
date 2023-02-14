@@ -100,4 +100,5 @@ Here are some useful links used to make this project a reality.
 - [Font Combiner - FontJoy](https://fontjoy.com)
 
 **Hosting Related**:
--
+- [Deploy Flutter app to Firebase Hosting](https://medium.com/flutter/must-try-use-firebase-to-host-your-flutter-app-on-the-web-852ee533a469)
+- [Deploy Flutter Web App](https://medium.com/solute-labs/flutter-for-web-how-to-deploy-a-flutter-web-app-c7d9db7ced2e)
