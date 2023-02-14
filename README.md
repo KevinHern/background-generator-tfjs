@@ -1,3 +1,8 @@
+# Preview
+![](https://github.com/KevinHern/background-generator-tfjs/blob/main/misc/background.png)
+
+![](https://github.com/KevinHern/background-generator-tfjs/blob/main/misc/form_preview.png)
+
 # Description
 This is a project that combines app development and AI to make a small and simple yet charming demonstration so people can try it as they please.
 
