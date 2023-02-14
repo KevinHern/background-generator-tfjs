@@ -56,6 +56,8 @@ This directory contains the source code of the backend with an already pre-built
     - The pre-built app is under **/public-flutter/** directory.
     - The AI script is under **/src/** directory.
     - The internal Routing and app declaration are under the **/app/** directory.
+- misc:
+This directory just contains images used for illustrative purposes.
 
 To initialize the project, execute the following command inside the **/nodejs-server/** directory:
 
@@ -67,6 +69,12 @@ The entry point is **index.js**:
 
 ```bat
 node index.js
+```
+
+Access the web app locally by openning a browser and accessing the following address:
+
+```bat
+http://127.0.0.1:16000/
 ```
 
 # References
