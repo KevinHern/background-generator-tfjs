@@ -8,6 +8,46 @@ This is a project that combines app development and AI to make a small and simpl
 
 It consists of using AI to create backgrounds with random patterns that people can modify or explore. People can choose the degree of complexity of the background, the primary color and the pattern they want.
 
+# How to Execute
+1. The first requirement is to have [NodeJS](https://nodejs.org/en/download/) installed in your computer.
+2. Clone this repository
+3. Open a terminal inside the directory **/background-generator-tfjs/nodejs-server/**
+4. Install dependencies (must have internet connection):
+```bat
+npm install
+```
+
+If you have troubles with the TensorflowJS Library, run the following command:
+
+```bat
+npm rebuild @tensorflow/tfjs-node --build-from-source
+```
+
+5. Modify the file **ip_address.txt** found in **/background-generator-tfjs/nodejs-server/public-flutter/assets/** by changing the contents to computer's local IP address so other users can access the application.
+6. Run the server by executing:
+
+```bat
+node index.js
+```
+
+7. Test if the server is running properly by opening a browser and accessing the computer by writing an URL using its IP address the following way:
+
+```bat
+http://<ip_address>:43000/
+```
+
+Example: Lets say your computer's address is 192.168.1.17, then the link should be:
+
+```bat
+http://192.168.1.17:43000/
+```
+
+8. Test if the code is executing properly by creating a random image. If it gives you an error, check if the IP address, found in the **ip_address.txt**, is the correct one.
+
+9. Create a [QR code](https://www.qr-code-generator.com) based on the URL you used in the step above
+
+10. Enjoy! 
+
 # Technical Details
 
 ## Artificial Intelligence
@@ -102,10 +142,3 @@ Here are some useful links used to make this project a reality.
 **Hosting Related**:
 - [Deploy Flutter app to Firebase Hosting](https://medium.com/flutter/must-try-use-firebase-to-host-your-flutter-app-on-the-web-852ee533a469)
 - [Deploy Flutter Web App](https://medium.com/solute-labs/flutter-for-web-how-to-deploy-a-flutter-web-app-c7d9db7ced2e)
-
-# Notes
-If you have troubles with the TensorflowJS Library, run the following command:
-
-```bat
-npm rebuild @tensorflow/tfjs-node --build-from-source
-```
