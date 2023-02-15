@@ -14,22 +14,22 @@ function centerNormalization(centerPosition){
         // Top Left
         case 1:
             scales[0] = 0.25
-            scales[1] = 0.75
+            scales[1] = 0.25
             break;
         // Top Center
         case 2:
-            scales[0] = 0.5
-            scales[1] = 0.75
+            scales[0] = 0.25
+            scales[1] = 0.5
             break;
         // Top Right
         case 3:
-            scales[0] = 0.75
+            scales[0] = 0.25
             scales[1] = 0.75
             break;
         // Middle Left
         case 4:
-            scales[0] = 0.25
-            scales[1] = 0.5
+            scales[0] = 0.5
+            scales[1] = 0.25
             break;
         // Middle Center
         case 5:
@@ -38,23 +38,23 @@ function centerNormalization(centerPosition){
             break;
         // Middle Right
         case 6:
-            scales[0] = 0.75
-            scales[1] = 0.5
+            scales[0] = 0.5
+            scales[1] = 0.75
             break;
         // Bottom Left
         case 7:
-            scales[0] = 0.25
+            scales[0] = 0.75
             scales[1] = 0.25
             break;
         // Bottom Center
         case 8:
-            scales[0] = 0.5
-            scales[1] = 0.25
+            scales[0] = 0.75
+            scales[1] = 0.5
             break;
         // Bottom Right
         case 9:
             scales[0] = 0.75
-            scales[1] = 0.25
+            scales[1] = 0.75
             break;
     }
 
