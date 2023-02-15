@@ -37,7 +37,7 @@ class BackgroundFormUI extends ChangeNotifier {
         isRGBInputColorWheelMode = true,
         isVortexMode = true,
         hexColorInput = TextEditingController(),
-        selectedColor = Colors.grey,
+        selectedColor = const Color(0xFFDDDDDD),
         centerVerticalPosition = CenterVerticalPosition.CENTER,
         centerHorizontalPosition = CenterHorizontalPosition.CENTER;
 

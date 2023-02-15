@@ -1,8 +1,8 @@
 // Basic Imports
 import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
 
 // Models
-import 'package:flutter/foundation.dart';
 import 'package:flutter_frontend/data/models/background.dart';
 import 'package:flutter_frontend/data/models/operation_result.dart';
 
@@ -10,13 +10,16 @@ import 'package:flutter_frontend/data/models/operation_result.dart';
 import 'package:http/http.dart' as http;
 
 class NodeJSDatasource {
-  static const String nodejsURL = 'http://127.0.0.1:16000/';
+  Future<String> loadIpAddress() async {
+    return await rootBundle.loadString("ip_address.txt");
+  }
 
-  Future<Result> sendAndGenerate({required Background background}) async {
+  Future<Result> sendAndGenerate(
+      {required Background background, required String nodejsIPAddress}) async {
     try {
       // Send data to server
       final response = await http.post(
-        Uri.parse("${nodejsURL}background"),
+        Uri.parse("http://$nodejsIPAddress:43000/background"),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
