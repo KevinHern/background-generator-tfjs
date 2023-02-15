@@ -36,7 +36,7 @@ app.all('*', function(req, res) {
 	environment.
 	The other port is a user assigned port for developing. This port only works locally
 */
-var server = app.listen(process.env.PORT || 16000, function () {
+var server = app.listen(process.env.PORT || 43000, function () {
     var host = server.address().address
     var port = server.address().port
     
