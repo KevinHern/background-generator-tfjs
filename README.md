@@ -24,6 +24,8 @@ npm rebuild @tensorflow/tfjs-node --build-from-source
 ```
 
 5. Modify the file **ip_address.txt** found in **/background-generator-tfjs/nodejs-server/public-flutter/assets/** by changing the contents to computer's local IP address so other users can access the application.
+As last resort, use 127.0.0.1 if the project won't have any interactions with the users.
+
 6. Run the server by executing:
 
 ```bat
