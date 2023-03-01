@@ -17,4 +17,5 @@ abstract class BackgroundManagementRepository {
   });
   void updateBackground(
       {required Background newBackground, required Background oldBackground});
+  Background createRandomBackground();
 }

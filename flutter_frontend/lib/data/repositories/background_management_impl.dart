@@ -1,7 +1,9 @@
 // Basic Imports
 import 'dart:ui';
+import 'dart:math' as math;
 
 // Models
+import 'package:dart_random_choice/dart_random_choice.dart';
 import 'package:flutter_frontend/data/models/background.dart';
 
 // Repositories
@@ -34,4 +36,19 @@ class BackgroundManagementImpl implements BackgroundManagementRepository {
           {required Background newBackground,
           required Background oldBackground}) =>
       oldBackground.update(newBackground: newBackground);
+
+  @override
+  Background createRandomBackground() {
+    final int randomDimension = randomChoice(Background.imgDimensions);
+    return Background(
+      height: randomDimension,
+      width: randomDimension,
+      color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+          .withOpacity(1.0),
+      centerHorizontalPosition: randomChoice(CenterHorizontalPosition.values),
+      centerVerticalPosition: randomChoice(CenterVerticalPosition.values),
+      isVortex: true,
+      imageComplexity: randomChoice(Background.imgComplexity),
+    );
+  }
 }

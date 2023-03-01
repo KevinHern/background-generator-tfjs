@@ -1,5 +1,6 @@
 // Basic Imports
 import 'package:flutter/material.dart';
+import 'dart:async' show Timer;
 
 // Models
 import 'package:flutter_frontend/data/models/background.dart';
@@ -25,10 +26,11 @@ class BackgroundUI extends ChangeNotifier {
 class BackgroundFormUI extends ChangeNotifier {
   final TextEditingController hexColorInput;
   int selectedHeight, selectedWidth, selectedimageComplexity;
-  bool isRGBInputColorWheelMode, isVortexMode;
+  bool isRGBInputColorWheelMode, isVortexMode, autoGenerate;
   Color selectedColor;
   CenterVerticalPosition centerVerticalPosition;
   CenterHorizontalPosition centerHorizontalPosition;
+  Timer? timer;
 
   BackgroundFormUI()
       : selectedHeight = 1,
@@ -36,6 +38,7 @@ class BackgroundFormUI extends ChangeNotifier {
         selectedimageComplexity = 1,
         isRGBInputColorWheelMode = true,
         isVortexMode = true,
+        autoGenerate = false,
         hexColorInput = TextEditingController(),
         selectedColor = const Color(0xFFDDDDDD),
         centerVerticalPosition = CenterVerticalPosition.CENTER,

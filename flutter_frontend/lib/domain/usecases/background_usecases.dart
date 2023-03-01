@@ -49,4 +49,21 @@ class BackgroundUseCases {
     // Return result
     return backgroundResult;
   }
+
+  Future<Result> randomBackground() async {
+    // Create Model
+    final Background newBackground =
+        backgroundManagementRepository.createRandomBackground();
+
+    // Read current IP Address
+    final String nodejsIpAddress =
+        (await nodeJSDatasource.loadIpAddress()).trim();
+
+    // Send to server and await
+    final Result backgroundResult = await nodeJSDatasource.sendAndGenerate(
+        background: newBackground, nodejsIPAddress: nodejsIpAddress);
+
+    // Return result
+    return backgroundResult;
+  }
 }

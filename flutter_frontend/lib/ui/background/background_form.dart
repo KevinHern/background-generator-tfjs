@@ -1,4 +1,5 @@
 // Basic Imports
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
@@ -276,63 +277,102 @@ class BackgroundFormState extends State<BackgroundForm> {
                       const SizedBox(
                         height: 16.0,
                       ),
+                      ChoiceChip(
+                          label: const Text("Auto Generate"),
+                          selected: backgroundFormUI.autoGenerate,
+                          onSelected: (bool selected) {
+                            backgroundFormUI.autoGenerate =
+                                !backgroundFormUI.autoGenerate;
+
+                            if (backgroundFormUI.autoGenerate) {
+                              Timer.periodic(
+                                const Duration(seconds: 7),
+                                (timer) async {
+                                  if (!backgroundFormUI.autoGenerate) {
+                                    timer.cancel();
+                                  } else {
+                                    final Result result = await widget
+                                        .backgroundUseCases
+                                        .randomBackground();
+                                    if (result.success) {
+                                      Provider.of<BackgroundUI>(context,
+                                              listen: false)
+                                          .background = result.object;
+                                    }
+                                  }
+                                },
+                              );
+                            }
+
+                            backgroundFormUI.update();
+                          }),
+                      const SizedBox(
+                        height: 16.0,
+                      ),
                       FloatingActionButton.extended(
                         label: const Text("Generate"),
                         icon: const Icon(Icons.send),
-                        onPressed: () async {
-                          // Send information and wait for the result
-                          final Result result = await showDialog<Result>(
-                            barrierDismissible: false,
-                            context: context,
-                            builder: (context) {
-                              return FutureProgressDialog(Future<Result>(
-                                () async {
-                                  return await widget.backgroundUseCases
-                                      .generateBackground(
-                                    height: backgroundFormUI.selectedHeight,
-                                    width: backgroundFormUI.selectedWidth,
-                                    color: backgroundFormUI.selectedColor,
-                                    imageComplexity: backgroundFormUI
-                                        .selectedimageComplexity,
-                                    centerHorizontalPosition: backgroundFormUI
-                                        .centerHorizontalPosition,
-                                    centerVerticalPosition:
-                                        backgroundFormUI.centerVerticalPosition,
-                                    isVortex: backgroundFormUI.isVortexMode,
-                                  );
-                                },
-                              ));
-                            },
-                          ) as Result;
+                        onPressed: backgroundFormUI.autoGenerate
+                            ? null
+                            : () async {
+                                // Send information and wait for the result
+                                final Result result = await showDialog<Result>(
+                                  barrierDismissible: false,
+                                  context: context,
+                                  builder: (context) {
+                                    return FutureProgressDialog(Future<Result>(
+                                      () async {
+                                        return await widget.backgroundUseCases
+                                            .generateBackground(
+                                          height:
+                                              backgroundFormUI.selectedHeight,
+                                          width: backgroundFormUI.selectedWidth,
+                                          color: backgroundFormUI.selectedColor,
+                                          imageComplexity: backgroundFormUI
+                                              .selectedimageComplexity,
+                                          centerHorizontalPosition:
+                                              backgroundFormUI
+                                                  .centerHorizontalPosition,
+                                          centerVerticalPosition:
+                                              backgroundFormUI
+                                                  .centerVerticalPosition,
+                                          isVortex:
+                                              backgroundFormUI.isVortexMode,
+                                        );
+                                      },
+                                    ));
+                                  },
+                                ) as Result;
 
-                          // Check and extract the image
-                          if (result.success) {
-                            // An image was generated. Retrieve image, show it and display information
-                            AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.info,
-                              title: 'Warning',
-                              desc: result.message,
-                              btnOkOnPress: () {},
-                              btnOkIcon: Icons.check,
-                              btnOkColor: Colors.green,
-                            ).show();
+                                // Check and extract the image
+                                if (result.success) {
+                                  // An image was generated. Retrieve image, show it and display information
+                                  AwesomeDialog(
+                                    context: context,
+                                    dialogType: DialogType.info,
+                                    title: 'Warning',
+                                    desc: result.message,
+                                    btnOkOnPress: () {},
+                                    btnOkIcon: Icons.check,
+                                    btnOkColor: Colors.green,
+                                  ).show();
 
-                            Provider.of<BackgroundUI>(context, listen: false)
-                                .background = result.object;
-                          } else {
-                            // An error occurred. Just display de error message
-                            AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.error,
-                              title: 'Error',
-                              desc: result.message,
-                              btnOkOnPress: () {},
-                              btnOkIcon: Icons.cancel,
-                              btnOkColor: Colors.red,
-                            ).show();
-                          }
-                        },
+                                  Provider.of<BackgroundUI>(context,
+                                          listen: false)
+                                      .background = result.object;
+                                } else {
+                                  // An error occurred. Just display de error message
+                                  AwesomeDialog(
+                                    context: context,
+                                    dialogType: DialogType.error,
+                                    title: 'Error',
+                                    desc: result.message,
+                                    btnOkOnPress: () {},
+                                    btnOkIcon: Icons.cancel,
+                                    btnOkColor: Colors.red,
+                                  ).show();
+                                }
+                              },
                       ),
                     ],
                   );
